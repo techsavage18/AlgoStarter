@@ -2,7 +2,7 @@
 
 Algostarter is a crowdfunding platform built on the Algorand blockchain. It solves several issues associated with traditional crowdfunding platforms by providing accessibility, efficiency, transparency, security, innovation, and community.
 
-Website: algo-starter.vercel.app
+Website: https://algo-starter.vercel.app
 
 ## Installation
 
