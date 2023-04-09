@@ -1,4 +1,4 @@
-# Algostarter
+# AlgoStarter
 
 Algostarter is a crowdfunding platform built on the Algorand blockchain. It solves several issues associated with traditional crowdfunding platforms by providing accessibility, efficiency, transparency, security, innovation, and community.
 
