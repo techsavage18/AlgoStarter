@@ -4,23 +4,6 @@ Algostarter is a crowdfunding platform built on the Algorand blockchain. It solv
 
 Website: https://algo-starter.vercel.app
 
-## Installation
-
-To use Algostarter, follow these steps:
-
-1. Clone this repository: `git clone https://github.com/techsavage18/algostarter.git`
-2. Install the required dependencies: `npm install`
-3. Start the application: `npm start`
-
-## Usage
-
-To use Algostarter, follow these steps:
-
-1. Create an Algorand account.
-2. Fund your account with Algo tokens.
-3. Browse available projects on Algostarter.
-4. Fund projects that interest you or create your own project and raise funds.
-
 ## Features
 
 Algostarter includes the following features:
@@ -30,6 +13,23 @@ Algostarter includes the following features:
 - Receive real-time updates on the status of your funded projects
 - Use the Algorand blockchain for fast and secure transactions
 - Verify and audit all transactions using the Algorand blockchain
+
+## How to Use
+
+To use Algostarter, follow these steps:
+
+1. Create an Algorand account.
+2. Fund your account with Algo tokens.
+3. Browse available projects on Algostarter.
+4. Fund projects that interest you or create your own project and raise funds.
+
+## Installation
+
+To use Algostarter, follow these steps:
+
+1. Clone this repository: `git clone https://github.com/techsavage18/algostarter.git`
+2. Install the required dependencies: `npm install`
+3. Start the application: `npm start`
 
 ## Contributing
 
