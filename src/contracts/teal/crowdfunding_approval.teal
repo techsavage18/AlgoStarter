@@ -1,0 +1,245 @@
+#pragma version 6
+txn ApplicationID
+int 0
+==
+bnz main_l14
+txn OnCompletion
+int DeleteApplication
+==
+bnz main_l13
+txn OnCompletion
+int UpdateApplication
+==
+bnz main_l12
+txn OnCompletion
+int OptIn
+==
+bnz main_l11
+txna ApplicationArgs 0
+byte "donate"
+==
+bnz main_l10
+txna ApplicationArgs 0
+byte "claim"
+==
+bnz main_l9
+txna ApplicationArgs 0
+byte "refund"
+==
+bnz main_l8
+err
+main_l8:
+global LatestTimestamp
+byte "END_DATE"
+app_global_get
+>=
+assert
+byte "CURRENT_AMOUNT"
+app_global_get
+byte "GOAL_AMOUNT"
+app_global_get
+<=
+assert
+txn Sender
+byte "ACCOUNT_INVESTMENT"
+app_local_get
+int 0
+>
+assert
+byte "CURRENT_AMOUNT"
+byte "CURRENT_AMOUNT"
+app_global_get
+txn Sender
+byte "ACCOUNT_INVESTMENT"
+app_local_get
+-
+app_global_put
+txn Sender
+byte "ACCOUNT_INVESTMENT"
+int 0
+app_local_put
+int 1
+return
+main_l9:
+global LatestTimestamp
+byte "END_DATE"
+app_global_get
+>=
+assert
+byte "CURRENT_AMOUNT"
+app_global_get
+byte "GOAL_AMOUNT"
+app_global_get
+>=
+assert
+txn Sender
+byte "CREATOR"
+app_global_get
+==
+assert
+byte "CURRENT_AMOUNT"
+int 0
+app_global_put
+int 1
+return
+main_l10:
+txn Sender
+global CurrentApplicationID
+app_opted_in
+assert
+global LatestTimestamp
+byte "START_DATE"
+app_global_get
+>=
+assert
+global LatestTimestamp
+byte "END_DATE"
+app_global_get
+<=
+assert
+global GroupSize
+int 2
+==
+assert
+gtxn 1 TypeEnum
+int pay
+==
+assert
+gtxn 1 Receiver
+byte "ESCROW_ADDR"
+app_global_get
+==
+assert
+gtxn 1 Amount
+global MinTxnFee
+>=
+assert
+byte "CURRENT_AMOUNT"
+byte "CURRENT_AMOUNT"
+app_global_get
+gtxn 1 Amount
++
+app_global_put
+gtxn 1 Sender
+byte "ACCOUNT_INVESTMENT"
+gtxn 1 Sender
+byte "ACCOUNT_INVESTMENT"
+app_local_get
+gtxn 1 Amount
++
+app_local_put
+int 1
+return
+main_l11:
+global LatestTimestamp
+byte "START_DATE"
+app_global_get
+>=
+assert
+txn Sender
+byte "ACCOUNT_INVESTMENT"
+int 0
+app_local_put
+int 1
+return
+main_l12:
+txn NumAppArgs
+int 1
+==
+assert
+txn Sender
+byte "CREATOR"
+app_global_get
+==
+assert
+byte "ESCROW_ADDR"
+txna ApplicationArgs 0
+app_global_put
+int 1
+return
+main_l13:
+txn Sender
+byte "CREATOR"
+app_global_get
+==
+assert
+global LatestTimestamp
+byte "END_DATE"
+app_global_get
+>=
+assert
+int 1
+return
+main_l14:
+txn NumAppArgs
+int 5
+==
+assert
+global LatestTimestamp
+txna ApplicationArgs 0
+btoi
+<=
+assert
+txna ApplicationArgs 1
+btoi
+txna ApplicationArgs 0
+btoi
+>=
+assert
+txna ApplicationArgs 2
+btoi
+int 0
+>
+assert
+byte "START_DATE"
+txna ApplicationArgs 0
+btoi
+app_global_put
+byte "END_DATE"
+txna ApplicationArgs 1
+btoi
+app_global_put
+byte "GOAL_AMOUNT"
+txna ApplicationArgs 2
+btoi
+app_global_put
+byte "PLATFORM_ADDRESS"
+txna ApplicationArgs 3
+app_global_put
+byte "IS_SPONSORED"
+txna ApplicationArgs 4
+btoi
+app_global_put
+byte "CREATOR"
+txn Sender
+app_global_put
+byte "CURRENT_AMOUNT"
+int 0
+app_global_put
+byte "IS_SPONSORED"
+app_global_get
+int 1
+==
+bnz main_l16
+main_l15:
+int 1
+return
+main_l16:
+global GroupSize
+int 2
+==
+assert
+gtxn 1 TypeEnum
+int pay
+==
+assert
+gtxn 1 Receiver
+byte "PLATFORM_ADDRESS"
+app_global_get
+==
+assert
+gtxn 1 Amount
+global MinTxnFee
+>=
+assert
+b main_l15
